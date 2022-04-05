@@ -5,6 +5,10 @@ import QJL
 def from_console():
     while True:
         text = input("QJL >")
+        # termination
+        if text == "886":
+            return 
+        #run the compiler and interpreter
         result, error = QJL.run('<Console input from user>',text)
         if error:
             print(error.as_string())

@@ -4,9 +4,6 @@
 #CONSTANTS
 ####################################################
 
-from distutils.log import error
-
-from sklearn.preprocessing import OneHotEncoder
 from string_with_arrows import *
 
 
@@ -33,7 +30,7 @@ class IllegalCharError(Error):
     def __init__(self, pos_start, pos_end, details):
         super().__init__(pos_start, pos_end, 'Illegal Character', details)
 
-class IllegalSyntaxError(Error):
+class InvalidSyntaxError(Error):
     def __init__(self, pos_start, pos_end, details):
         super().__init__(pos_start, pos_end, 'Invalid Syntax', details)
 
@@ -94,6 +91,7 @@ TT_PLUS     =   'PLUS'
 TT_MINUS    =   'MINUS'
 TT_MUL      =   'MUL'
 TT_DIV      =   'DIV'
+TT_POWER    =   'POWER'
 TT_LPAREN   =   'LPAREN'
 TT_RPAREN   =   'RPAREN'
 TT_EOF      =   'EOF'
@@ -126,7 +124,8 @@ SYMBOL_DICT = {
     '*' : TT_MUL,
     '/' : TT_DIV,
     '(' : TT_LPAREN,
-    ')' : TT_RPAREN
+    ')' : TT_RPAREN,
+    '^' : TT_POWER
 }
 
 ####################################################
@@ -251,6 +250,7 @@ class ParseResult:
 #PARSER
 ####################################################
 
+
 class Parser:
     def __init__(self, tokens) -> None:
         self.tokens = tokens
@@ -263,31 +263,25 @@ class Parser:
             self.current_tok = self.tokens[self.tok_idx]
         return self.current_tok
 
-##############################
     def parse(self):
         res = self.expr()
         if not res.error and self.current_tok.type != TT_EOF:
             return res.failure(     
-                IllegalSyntaxError(
+                InvalidSyntaxError(
                 self.current_tok.pos_start, self.current_tok.pos_end,
                 "Expected '+', '-', '*', or '/'"
             )
         )
         return res
 
-    def factor(self):
+    ##############################
+
+    def atom(self):
         res = ParseResult()
         tok = self.current_tok
 
-        #positive number or negative number
-        if tok.type in (TT_PLUS, TT_MINUS):
-            res.register(self.advance())
-            factor = res.register(self.factor())
-            if res.error: return res
-            return res.success(UnaryOpNode(tok, factor))
-
         #integer or float
-        elif tok.type in (TT_INT, TT_FLOAT):
+        if tok.type in (TT_INT, TT_FLOAT):
             res.register(self.advance())
             return res.success(NumberNode(tok))
 
@@ -301,18 +295,35 @@ class Parser:
                 return res.success(expr)
             else:
                 return res.failure(
-                    IllegalSyntaxError(
+                    InvalidSyntaxError(
                 self.current_tok.pos_start, self.current_tok.pos_end,
                 "Expected ')'"
                 )
             )
-        
+
         return res.failure(
-            IllegalSyntaxError(
+            InvalidSyntaxError(
                 tok.pos_start, tok.pos_end,
-                "Expected int or float"
+                "Expected int or float, '+', '-' or '(' "
             )
         )
+
+    def power(self):
+        return self.bin_op(self.atom, (TT_POWER, ), self.factor)
+
+    def factor(self):
+        res = ParseResult()
+        tok = self.current_tok
+
+        #positive number or negative number
+        if tok.type in (TT_PLUS, TT_MINUS):
+            res.register(self.advance())
+            factor = res.register(self.factor())
+            if res.error: return res
+            return res.success(UnaryOpNode(tok, factor))
+
+        return self.power()
+
 
     def term(self):
         return self.bin_op(self.factor, (TT_MUL, TT_DIV))
@@ -320,16 +331,18 @@ class Parser:
     def expr(self):
         return self.bin_op(self.term, (TT_PLUS, TT_MINUS))
 
-    def bin_op(self, func, ops):
-        res = ParseResult()
+    def bin_op(self, func_a, ops, func_b = None):
+        if func_b == None:
+            func_b = func_a
 
-        left = res.register(func())
+        res = ParseResult()
+        left = res.register(func_a())
         if res.error: return res
 
         while self.current_tok.type in ops:
             op_tok = self.current_tok
             res.register(self.advance())
-            right = res.register(func())
+            right = res.register(func_b())
             if res.error: return res
             left = BinOpNode(left, op_tok, right)
 
@@ -397,6 +410,10 @@ class Number:
                 )
             return Number(self.value / other.value).set_context(self.context), None
 
+    def powered_by(self, other):
+        if isinstance(other, Number):
+            return Number(self.value ** other.value).set_context(self.context), None
+
     def __repr__(self) -> str:
         return str(self.value)
 
@@ -447,6 +464,8 @@ class Interpreter:
             result, error = left.multed_by(right)
         elif node.op_tok.type == TT_DIV:
             result, error = left.dived_by(right)
+        elif node.op_tok.type == TT_POWER:
+            result, error = left.powered_by(right)
 
         if error:
             return res.failure(error)
@@ -478,12 +497,14 @@ def run(fn, text):
     #generate tokens
     lexer = Lexer(fn, text)
     tokens, error = lexer.make_tokens()
+    print(tokens)
     if error:
         return None, error
     #generate AST
     parser = Parser(tokens)
     ast = parser.parse()
     if ast.error: return None, ast.error
+    print(ast.node)
 
     #Run program
     interpreter = Interpreter()
