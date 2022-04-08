@@ -13,4 +13,8 @@ For example:
     BS a = 5
     1 + (BS a = 5)
 
+# 4. make boolean and comparation 
+    False = 0
+    True = 1
+
 # Quit key word:  QSL >886
