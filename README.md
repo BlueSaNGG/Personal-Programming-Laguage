@@ -17,4 +17,11 @@ For example:
     False = 0
     True = 1
 
+# 5. add if condition
+    IF 1 THEN 2 ELIF 2 THEN 3 ELSE 4
+
+# 6. add FOR loop and WHILE loop
+    BS result = 1
+    FOR i = 5 TO 0 STEP -1 THEN BS result = result * i
+    
 # Quit key word:  QSL >886
