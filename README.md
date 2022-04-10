@@ -24,4 +24,21 @@ For example:
     BS result = 1
     FOR i = 5 TO 0 STEP -1 THEN BS result = result * i
     
+# 7. add FUNC 
+    FUN add(a,b) -> a + b
+    add(1,2)
+
+    BS some_func = add
+    some_func(1,2)
+
+    FUN (a) -> a + 6
+    BS some_func = FUN(a) -> a + 6
+    some_func(12)
+
+    FUN test(a) -> a / 0
+    test(123)
+
+    # Runtime Error: Division by zero
+
+
 # Quit key word:  QSL >886
