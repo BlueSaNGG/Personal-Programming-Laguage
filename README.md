@@ -40,5 +40,13 @@ For example:
 
     # Runtime Error: Division by zero
 
+# 8. add String type
+    "Text"
+    "Text with \"quotes\"" -> Text with "quotes"
+    "Text with \\ backslashes \\"   -> Text with \ backslashes \
+    "Text \nwith \nnewlines"    ->  text 
+                                    with
+                                    newlines 
+
 
 # Quit key word:  QSL >886
