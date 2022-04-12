@@ -1,4 +1,3 @@
-from logging import basicConfig
 import QJL
 
 
@@ -17,9 +16,9 @@ def from_console():
             
 
 def from_file(filename):
-    f = open('test.txt', 'r')
+    f = open(filename, 'r')
     content = f.read()
-    # print(content)
+    print(content)
     result, error = QJL.run('test',content)
     if error:
         print(error.as_string())
@@ -28,3 +27,4 @@ def from_file(filename):
 
 
 from_console()
+# from_file("test.txt")

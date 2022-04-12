@@ -21,9 +21,16 @@ For example:
     IF 1 THEN 2 ELIF 2 THEN 3 ELSE 4
 
 # 6. add FOR loop and WHILE loop
+    FOR <var_name> = <start_value> TO <end_value> THEN <expr>
+
     BS result = 1
     FOR i = 5 TO 0 STEP -1 THEN BS result = result * i
-    
+    FOR i = 1 TO 9 THEN 2^i
+
+
+    WHILE <condition> THEN <expr>
+    BS result = 5
+    WHILE result > 0 THEN BS result = result -1
 # 7. add FUNC 
     FUN add(a,b) -> a + b
     add(1,2)
@@ -48,5 +55,25 @@ For example:
                                     with
                                     newlines 
 
+# 9. add List
+    []
+    [1, 2, 3]
+
+    add
+    [1, 2, 3] + 4 => [1, 2, 3, 4]
+    
+    concat
+    [1, 2, 3] * [3, 4, 5] => [1, 2, 3, 4, 5]
+    
+    remove
+    [1, 2, 3] - 1   => [1, 3]
+    [1, 2, 3] - 0   => [2, 3]
+    [1, 2, 3] - -1  => [1, 2]
+    [1, 2, 3] - -2  => [1, 3]
+
+    get
+    [1, 2, 3] / 0  => 1
+    [1, 2, 3] / 1  => 2
+    [1, 2, 3] / -1  => 3
 
 # Quit key word:  QSL >886
