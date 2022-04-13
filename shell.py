@@ -12,7 +12,7 @@ def from_console():
         if error:
             print(error.as_string())
         else:
-            print(result)
+            print(repr(result))
             
 
 def from_file(filename):

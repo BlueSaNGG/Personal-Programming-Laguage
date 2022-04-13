@@ -76,4 +76,20 @@ For example:
     [1, 2, 3] / 1  => 2
     [1, 2, 3] / -1  => 3
 
+
+# 10. built-in Functions
+
+    PRINT
+    PRINT_RET
+    INPUT
+    INPUT_INT
+    CLEAR
+    IS_NUMBER
+    IS_STRING
+    IS_LIST
+    IS_FUNCTION
+    APPEND
+    POP
+    EXTEND
+    
 # Quit key word:  QSL >886
