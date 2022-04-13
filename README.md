@@ -91,5 +91,32 @@ For example:
     APPEND
     POP
     EXTEND
+
+# 11. Multi-lines statements
+    PRINT("world")
+    PRINT("Hello"); PRINT("World")
+
+    IF <expr> THEN
+        <expr1>
+        <expr2>
+        <expr3>
+    END
     
+    FOR <expr> THEN
+        <expr1>
+        <expr2>
+        <expr3>
+    END
+
+    FUN <name>()
+        <expr1>
+        <expr2>
+        <expr3>
+    END
+
+
+    1 + 2; 3 + 4;
+    BS result = IF 5 == 5 THEN "math works" ELSE "no";
+
+    IF 5 == 5 THEN; PRINT("math"); PRINT("works") ELSE PRINT("broken")
 # Quit key word:  QSL >886
