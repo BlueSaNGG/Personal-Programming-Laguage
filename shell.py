@@ -32,6 +32,6 @@ def from_file(filename):
             print(repr(result))
 
 
-# from_console()
+from_console()
 # from_file("test.txt")
-from_file("break.txt")
+# from_file("break.txt")
