@@ -119,4 +119,45 @@ For example:
     BS result = IF 5 == 5 THEN "math works" ELSE "no";
 
     IF 5 == 5 THEN; PRINT("math"); PRINT("works") ELSE PRINT("broken")
+
+# 12. RETURN , BREAK, CONTINUE
+    FUN add(a,b)
+        RETURN a + b
+    END
+
+    FUN example()
+        #do stuff
+        IF ...  THEN
+            RETURN
+        END
+        #do more stuff
+    END
+
+    IF condition THEN RETURN
+
+
+    FOR i = 0 TO 10
+        IF somecodition THEN
+            BREAK
+        END
+
+        IF someothercondition THEN
+            CONTINUE
+        END
+    END
+
+
+    FUN myfuncA() -> myvalue
+    
+    FUN myfuncB() 
+        # statement1
+        # statement2
+        RETURN myvalue
+    END
+
+    FUN put5() -> 5
+
+    FUN test()
+        RETURN 5
+    END
 # Quit key word:  QSL >886

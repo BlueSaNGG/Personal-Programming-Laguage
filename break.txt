@@ -1,0 +1,46 @@
+FUN put5() -> 5
+
+FUN add(a,b)
+    RETURN a + b
+END
+
+PRINT(add(1,2))
+
+FUN example()
+    1
+    IF 1  THEN
+        RETURN
+    END
+    1
+END
+
+example()
+
+PRINT(put5())
+
+FUN test();
+BS foo = 5;
+RETURN foo;
+END
+
+PRINT(test())
+
+
+BS a = [];
+
+FOR i = 0 TO 10 THEN;
+    IF i ==4 THEN CONTINUE ELIF i == 8 THEN BREAK;
+    BS a = a + i; 
+    END;
+a;
+
+PRINT(a);
+BS a = [];
+BS i = 0;
+WHILE i < 10 THEN;
+    BS i = i + 1;
+    IF i == 4 THEN CONTINUE;
+    IF i == 8 THEN BREAK;
+    BS a = a + i;
+END;
+PRINT(a)
