@@ -1,0 +1,35 @@
+# This is a very useful piece of software
+
+FUN oopify(prefix) -> prefix + "oop"
+
+FUN join(elements, separator)
+    BS result = ""
+    BS len = LEN(elements)
+
+    FOR i = 0 TO len THEN
+        BS result = result + elements/i
+        IF i != len - 1 THEN BS result = result + separator
+    END
+
+    RETURN result
+END
+
+FUN map(elements, func)
+    BS new_elements = []
+
+    FOR i = 0 TO LEN(elements) THEN
+        APPEND(new_elements, func(elements/i))
+    END
+
+    RETURN new_elements
+END
+
+
+# loop, spoop
+
+PRINT("Greeting universe!")
+
+FOR i = 0 TO 5 THEN
+    PRINT(join(map(["l", "sp"], oopify), ","))
+    PRINT(join([oopify("l"), oopify("sp")], ","))
+END

@@ -198,6 +198,8 @@ class Lexer:
         while self.current_char != None:
             if self.current_char in ' \t':
                 self.advance()
+            elif self.current_char == '#':
+                self.skip_comment()
             elif self.current_char in ';\n':
                 tokens.append(Token(TT_NEWLINE, pos_start=self.pos))
                 self.advance()
@@ -354,6 +356,15 @@ class Lexer:
             tok_type = TT_ARROW
         
         return Token(tok_type, pos_start = pos_start, pos_end = self.pos)
+
+    def skip_comment(self):
+        self.advance()
+
+        while self.current_char and (self.current_char != '\n'):
+            # print(self.current_char)
+            self.advance()
+
+        self.advance()
 
 ####################################################
 #NODE
@@ -1599,7 +1610,7 @@ class Number(Value):
         else:
             return None, Value.illegal_operation(self.pos_start, other.pos_end)
 
-    def get_comparison_ne(self, other):
+    def get_comparison_nq(self, other):
         if isinstance(other, Number):
             return Number(int(self.value != other.value)).set_context(self.context), None
         else:
@@ -2166,7 +2177,7 @@ class Interpreter:
         elif node.op_tok.type == TT_LTE:
             result, error = left.get_comparison_lte(right)
         elif node.op_tok.type == TT_GTE:
-            result, error = left.get_comparison_nqgte(right)
+            result, error = left.get_comparison_gte(right)
         elif node.op_tok.matches(TT_KEYWORD, 'AND'):
             result, error = left.anded_by(right)
         elif node.op_tok.matches(TT_KEYWORD, 'OR'):

@@ -160,4 +160,12 @@ For example:
     FUN test()
         RETURN 5
     END
+
+# 13. LEN and RUN
+    RUN file
+    LEN for list
+
+# 14. COMMNETS
+    #Comment
+    
 # Quit key word:  QSL >886

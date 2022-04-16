@@ -44,3 +44,5 @@ WHILE i < 10 THEN;
     BS a = a + i;
 END;
 PRINT(a)
+
+#nihao
