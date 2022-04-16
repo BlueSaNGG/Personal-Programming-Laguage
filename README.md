@@ -167,5 +167,9 @@ For example:
 
 # 14. COMMNETS
     #Comment
-    
+
+# 15 TYPE
+    BUILT_IN function:
+    TYPE()  4/16/2022
+
 # Quit key word:  QSL >886

@@ -1566,6 +1566,7 @@ class Value:
 
 class Number(Value):
     def __init__(self, value) -> None:
+        self.type = "Number"
         super().__init__()
         self.value = value
 
@@ -1676,6 +1677,7 @@ Number.math_PI = Number(math.pi)
 class String(Value):
     def __init__(self, value) -> None:
         super().__init__()
+        self.type = "String"
         self.value = value
 
     def added_to(self, other):
@@ -1708,6 +1710,7 @@ class String(Value):
 class List(Value):
     def __init__(self, elements) -> None:
         super().__init__()
+        self.type = "List"
         self.elements = elements
     
     def added_to(self, other):
@@ -1770,6 +1773,7 @@ class List(Value):
 class BaseFunction(Value):
     def __init__(self, name) -> None:
         super().__init__()
+        self.type = "Function"
         self.name = name or "<anonymous>"
 
     def generate_new_context(self):
@@ -2036,6 +2040,14 @@ class BuiltInFunction(BaseFunction):
         return RTResult().success(Number.null)
     execute_run.arg_names = ['fn']
 
+    def execute_type(self, exec_ctx):
+        value = exec_ctx.symbol_table.get('value')
+        print(value.type)
+
+        return RTResult().success(Number.null)
+
+    execute_type.arg_names = ['value']
+
 
 BuiltInFunction.print           = BuiltInFunction("print")
 BuiltInFunction.print_ret       = BuiltInFunction("print_ret")
@@ -2051,6 +2063,7 @@ BuiltInFunction.pop             = BuiltInFunction("pop")
 BuiltInFunction.extend          = BuiltInFunction("extend")
 BuiltInFunction.len             = BuiltInFunction("len")
 BuiltInFunction.run             = BuiltInFunction("run")
+BuiltInFunction.type            = BuiltInFunction("type")
 
 ####################################################
 #CONTEXT
@@ -2364,6 +2377,7 @@ global_symbol_table.set("POP", BuiltInFunction.pop)
 global_symbol_table.set("EXTEND", BuiltInFunction.extend)
 global_symbol_table.set("LEN", BuiltInFunction.len)
 global_symbol_table.set("RUN", BuiltInFunction.run)
+global_symbol_table.set("TYPE", BuiltInFunction.type)
 
 def run(fn, text):
     #generate tokens
