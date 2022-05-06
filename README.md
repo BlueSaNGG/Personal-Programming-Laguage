@@ -1,7 +1,7 @@
 # Personal-Programming-Laguage
 
 # 1. do simple calculation using () and + - * /
-
+    1 + (5 + 3) * 2
 # 2. do power operation using ^
 
 # 3. make variales 
@@ -173,3 +173,9 @@ For example:
     TYPE()  4/16/2022
 
 # Quit key word:  QSL >886
+
+
+run unit test for Lexer, Parser, Interpreter:
+    > py -m unittest lexer_test
+    > py -m unittest parser_test
+    > py -m unittest interpreter_test
