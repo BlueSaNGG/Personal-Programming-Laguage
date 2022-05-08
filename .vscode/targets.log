@@ -8,10 +8,12 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri May 06 00:52:16 2022
+# Make data base, printed on Sun May 08 12:28:40 2022
 
 # Variables
 
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
 SYSTEMDRIVE = C:
 # environment
@@ -23,7 +25,7 @@ USERPROFILE = C:\Users\Bluesang
 # environment
 LOCALAPPDATA = C:\Users\Bluesang\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-d42942e5-1f91-4bb3-834b-76280d269f86-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-933ffabb-75c2-4362-944a-378af3028567-sock
 # environment
 VSCODE_CWD = C:\Users\Bluesang\AppData\Local\Programs\Microsoft VS Code
 # environment
@@ -37,7 +39,9 @@ MAKE_COMMAND := make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_36336_JQJGYXBMXNZZRHGP
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_21124_KBJIDTSJENVUODLF
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -89,7 +93,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 36336
+VSCODE_PID = 21124
 # environment
 CUDA_PATH = C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6
 # automatic
@@ -159,11 +163,9 @@ GNUMAKEFLAGS :=
 # environment
 OS = Windows_NT
 # environment
-__COMPAT_LAYER = DetectorsAppHealth
-# environment
 CUDA_PATH_V11_6 = C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := default
 # default
 MAKE_VERSION := 4.3
 # environment
@@ -213,7 +215,7 @@ PROCESSOR_REVISION = a503
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 165 Stepping 3, GenuineIntel
 # variable set hash-table stats:
-# Load=100/1024=10%, Rehash=0, Collisions=9/126=7%
+# Load=101/1024=10%, Rehash=0, Collisions=10/128=8%
 
 # Pattern-specific Variable Values
 
@@ -221,9 +223,9 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 165 Stepping 3, GenuineIntel
 
 # Directories
 
-# . (key e:/CS421/FinalProject_421/sourceCode/programming language, mtime 1649975872): 15 files, no impossibilities.
+# . (key e:/CS421/FinalProject_421/sourceCode/programming language, mtime 1649975872): 19 files, no impossibilities.
 
-# 15 files, no impossibilities in 1 directories.
+# 19 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -231,10 +233,17 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 165 Stepping 3, GenuineIntel
 
 # Files
 
+default:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 2):
+	py shell.py
+
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-06 00:52:08
+#  Last modified 2022-05-06 00:53:12
 #  File has been updated.
 #  Successfully updated.
 
@@ -252,19 +261,19 @@ all:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=4/1024=0%, Rehash=0, Collisions=0/14=0%
+# Load=5/1024=0%, Rehash=0, Collisions=0/15=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 18 / storage = 173 B / avg = 9 B
-# current buf: size = 8162 B / used = 173 B / count = 18 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 23 / storage = 211 B / avg = 9 B
+# current buf: size = 8162 B / used = 211 B / count = 23 / avg = 9 B
 
-# strcache performance: lookups = 22 / hit rate = 18%
+# strcache performance: lookups = 28 / hit rate = 17%
 # hash-table stats:
-# Load=18/8192=0%, Rehash=0, Collisions=0/22=0%
-# Finished Make data base on Fri May 06 00:52:16 2022
+# Load=23/8192=0%, Rehash=0, Collisions=0/28=0%
+# Finished Make data base on Sun May 08 12:28:40 2022
 
  

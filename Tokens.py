@@ -2,6 +2,9 @@
 #TOKEN  
 ####################################################
 
+from Error import Position
+
+
 TT_INT          =   'TT_INT'
 TT_FLOAT        =   'FLOAT'
 TT_STRING       =   'STRING'
@@ -32,6 +35,9 @@ class Token:
     def __init__(self, type_, value = None, pos_start = None, pos_end = None) -> None:
         self.type = type_
         self.value = value
+        # init fake position for unit test
+        self.pos_start = Position(0 , 0, 0, '', '')
+        self.pos_end = Position(0 , 0, 0, '', '')
 
         if pos_start:
             self.pos_start = pos_start.copy()

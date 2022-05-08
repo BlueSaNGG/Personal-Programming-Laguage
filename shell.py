@@ -34,4 +34,4 @@ def from_file(filename):
 
 # from_console()
 from_file("testFile/test.txt")
-# from_file("testFile/break.txt")
+from_file("testFile/break.txt")

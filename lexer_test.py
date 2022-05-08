@@ -1,57 +1,14 @@
-import types
 import unittest
 from Lexer import *
 
-#calculation, ^ symbol
-
-#define keyword
-text = "FUN add(a,b) -> a + b"
-lexer = Lexer("<input>", text)
-tokens, error = lexer.make_tokens()
-types_list = []
-for token in tokens:
-    if token.value:
-        types_list.append((token.type, token.value))
-    else:
-        types_list.append(token.type)
-print(types_list)
-
-
-# boolean, condition, if 
-
-# for loop, while loop, BREAK, CONTINUE keyword
-
-# function keyword + RETURN keyword
-
-# string type
-
-# List type, list calculation
-
-# some keywords
-
-# #comments
-
 class TestLexer(unittest.TestCase):
-
+    # ""
     def test_empty(self):
-        tokens, error = Lexer("<QJL>","").make_tokens()
-        result = []
-        for token in tokens:
-            if token.value:
-                result.append((token.type, token.value))
-            else:
-                result.append(token.type)
+        result = run_Lexer("")
         self.assertEqual(result, [TT_EOF])
     # "1.8 / 4 + (5 + 3) * 2 + 3 ^ 5"
     def test_simple_caculation(self):
-        lexer = Lexer("<QJL>", "1.8 / 4 + (5 + 3) * 2 + 3 ^ 5")
-        tokens, error = lexer.make_tokens()
-        result = []
-        for token in tokens:
-            if token.value:
-                result.append((token.type, token.value))
-            else:
-                result.append(token.type)
+        result = run_Lexer( "1.8 / 4 + (5 + 3) * 2 + 3 ^ 5")
         self.assertEqual(result, [
             (TT_FLOAT, 1.8),
             TT_DIV,
@@ -70,16 +27,9 @@ class TestLexer(unittest.TestCase):
             (TT_INT, 5),
             TT_EOF
             ])
-    # "BS a = True IF a THEN BS b = False ELSE b = True"
+    # "BS a = True IF a THEN BS b = False ELSE b = Truse"
     def test_condition(self):
-        lexer = Lexer("<QJL>", "BS a = True IF a THEN BS b = False ELSE b = True")
-        tokens, error = lexer.make_tokens()
-        result = []
-        for token in tokens:
-            if token.value:
-                result.append((token.type, token.value))
-            else:
-                result.append(token.type)
+        result = run_Lexer("BS a = True IF a THEN BS b = False ELSE b = True")
         self.assertEqual(result, [
             (TT_KEYWORD, 'BS'), 
             (TT_IDENTIFIER, 'a'), 
@@ -100,14 +50,7 @@ class TestLexer(unittest.TestCase):
             ])
     # "BS result = 1 FOR i = 5 TO 0 STEP -1 THEN BS result = result * i FOR i = 1 TO 9 THEN 2^i"
     def test_loop(self):
-        lexer = Lexer("<QJL>", "BS result = 1 FOR i = 5 TO 0 STEP -1 THEN BS result = result * i FOR i = 1 TO 9 THEN 2^i")
-        tokens, error = lexer.make_tokens()
-        result = []
-        for token in tokens:
-            if token.value:
-                result.append((token.type, token.value))
-            else:
-                result.append(token.type)
+        result = run_Lexer("BS result = 1 FOR i = 5 TO 0 STEP -1 THEN BS result = result * i FOR i = 1 TO 9 THEN 2^i")
         self.assertEqual(result, [
             (TT_KEYWORD, 'BS'), 
             (TT_IDENTIFIER, 'result'), 
@@ -142,14 +85,7 @@ class TestLexer(unittest.TestCase):
             ])
     # FUN add(a,b) -> a + b
     def test_function(self):
-        lexer = Lexer("<QJL>", "FUN add(a,b) -> a + b")
-        tokens, error = lexer.make_tokens()
-        result = []
-        for token in tokens:
-            if token.value:
-                result.append((token.type, token.value))
-            else:
-                result.append(token.type)
+        result = run_Lexer("FUN add(a,b) -> a + b")
         self.assertEqual(result, [
             (TT_KEYWORD, 'FUN'), 
             (TT_IDENTIFIER, 'add'), 
@@ -164,3 +100,21 @@ class TestLexer(unittest.TestCase):
             (TT_IDENTIFIER, 'b'), 
             TT_EOF
             ])
+    # # this is a comment -> EOF
+    def test_comments(self):
+        result = run_Lexer("#This is a comment")
+        self.assertEqual(result, [TT_EOF])
+
+def run_Lexer(input_String):
+    tokens, error = Lexer("<QJL>",input_String).make_tokens()
+    result = []
+    for token in tokens:
+        if token.value:
+            result.append((token.type, token.value))
+        else:
+            result.append(token.type)
+    return result
+        
+
+if __name__ == "__main__" :
+    unittest.main()
