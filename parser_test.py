@@ -1,7 +1,7 @@
 import unittest
 from Parser import *
 
-class TestLexer(unittest.TestCase):
+class TestParser(unittest.TestCase):
     # ""
     def test_empty(self):
         result = run_Parser([Token(TT_EOF)])

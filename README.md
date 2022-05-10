@@ -172,7 +172,7 @@ For example:
     BUILT_IN function:
     TYPE()  4/16/2022
 
-# Quit key word:  QSL >886
+# Quit key word:  QJL >886
 
 
 run unit test for Lexer, Parser, Interpreter:
